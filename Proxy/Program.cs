@@ -31,7 +31,7 @@ namespace Proxy
                 }
                 if (line == "console")
                 {
-                    Console.WriteLine(consoleCalculator.DailyCalories(weight, height));
+                    consoleCalculator.DailyCalories(weight, height);
                     Console.ReadKey();
                 }
             }
