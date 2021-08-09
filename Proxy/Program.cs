@@ -18,6 +18,7 @@ namespace Proxy
 
             CCalCalculator caloriesCalculator = new CCalCalculator();
             ICalculator calculator = new Proxy(caloriesCalculator);
+            ICalculator consoleCalculator = new ConsoleProxy(caloriesCalculator);
 
             StreamReader file = new StreamReader("C:\\Users\\Stas\\Desktop\\config.txt");
             while (!file.EndOfStream)
@@ -25,12 +26,12 @@ namespace Proxy
                 string line = file.ReadLine();
                 if (line == "file")
                 {
-                    File.AppendAllText("C:\\Users\\Stas\\Desktop\\result.txt", Convert.ToString(calculator.DailyCalories(weight, height)));
+                    calculator.DailyCalories(weight, height);
                     continue;
                 }
                 if (line == "console")
                 {
-                    Console.WriteLine(calculator.DailyCalories(weight, height));
+                    Console.WriteLine(consoleCalculator.DailyCalories(weight, height));
                     Console.ReadKey();
                 }
             }
