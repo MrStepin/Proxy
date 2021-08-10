@@ -10,10 +10,11 @@ namespace Proxy
     {
         public ICalculator CaloriesCalculator { get; set; }
 
-        public int DailyCalories(int weight, int height)
+        public int DailyCalories(int weight, int height, string line)
         {
             int result = (height - weight + 1500);
             return result; 
         }
+
     }
 }

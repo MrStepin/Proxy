@@ -8,6 +8,6 @@ namespace Proxy
 {
     public interface ICalculator
     {
-        int DailyCalories(int weight, int height);
+        int DailyCalories(int weight, int height, string line);
     }
 }

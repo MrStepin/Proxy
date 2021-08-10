@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Proxy
 {
-    public class ConsoleProxy : ICalculator
+    public class FileLogProxy : ICalculator
     {
         private readonly ICalculator _caloriesCalculator;
 
-        public ConsoleProxy(ICalculator caloriesCalculator)
+        public FileLogProxy(ICalculator caloriesCalculator)
         {
             _caloriesCalculator = caloriesCalculator;
         }
@@ -18,9 +19,9 @@ namespace Proxy
         public int DailyCalories(int weight, int height, string line)
         {
             int resultCalories = _caloriesCalculator.DailyCalories(weight, height, line);
-            Console.WriteLine(resultCalories);
-            Console.ReadKey();
 
+            File.AppendAllText("C:\\Users\\Stas\\Desktop\\result.txt", Convert.ToString(resultCalories));  
+    
             return resultCalories;
         }
     }
