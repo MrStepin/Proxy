@@ -16,26 +16,22 @@ namespace Proxy
             Console.WriteLine("Enter height");
             int height = Convert.ToInt32(Console.ReadLine());
 
-            CCalCalculator caloriesCalculator = new CCalCalculator();
+            ICalculator caloriesCalculator = new CCalCalculator();
 
             StreamReader file = new StreamReader("C:\\Users\\Stas\\Desktop\\config.txt");
+            string line = file.ReadLine();
             
-            while(!file.EndOfStream)
+            if (line == "file")
             {
-                string line = file.ReadLine();
-                if (line == "console")
-                {
-                    ICalculator calculator = new ConsoleProxy(caloriesCalculator);
-                    calculator.DailyCalories(weight, height, line);
-                    continue;
-                }
-                if (line == "file")
-                {
-                    ICalculator calculator = new FileLogProxy(caloriesCalculator);
-                    calculator.DailyCalories(weight, height, line);
-                }
+                caloriesCalculator = new FileLogProxy(caloriesCalculator);
+            }
+            line = file.ReadLine();
+            if (line == "console")
+            {
+                caloriesCalculator = new ConsoleProxy(caloriesCalculator);
             }
             file.Close();
+            caloriesCalculator.DailyCalories(weight, height, line);
         }
     }
 }
